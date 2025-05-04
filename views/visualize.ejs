@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualize Attendance & Marks</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="font-family: Arial; text-align: center;">
+  <h2>📊 Attendance & Marks Visualization</h2>
+
+  <label for="dateSelect">Select Date:</label>
+  <select id="dateSelect">
+    <% dates.forEach(function(item) { %>
+      <option value="<%= item.date.toLocaleDateString('en-CA') %>">
+        <%= item.date.toLocaleDateString('en-CA') %>
+      </option>
+    <% }); %>
+  </select>
+
+  <canvas id="lineChart" width="1000" height="500"></canvas>
+
+  <script>
+    const dateSelect = document.getElementById("dateSelect");
+    const ctx = document.getElementById("lineChart").getContext("2d");
+
+    let chart;
+
+    const fetchAndDisplay = async (selectedDate) => {
+      const res = await fetch(`/api/data/${selectedDate}`);
+      const data = await res.json();
+
+      const names = data.map(item => item.name);
+      const attendance = data.map(item => item.attendance === "Present" ? 1 : 0);
+      const marks = data.map(item => item.marks);
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: names,
+          datasets: [
+            {
+              label: 'Attendance (1 = Present, 0 = Absent)',
+              data: attendance,
+              borderColor: 'blue',
+              backgroundColor: 'rgba(0, 0, 255, 0.1)',
+              tension: 0.4,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Marks',
+              data: marks,
+              borderColor: 'green',
+              backgroundColor: 'rgba(0, 128, 0, 0.1)',
+              tension: 0.4,
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: {
+              display: true,
+              text: `Attendance & Marks on ${selectedDate}`
+            }
+          },
+          scales: {
+            y: {
+              type: 'linear',
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Attendance'
+              },
+              ticks: {
+                stepSize: 1,
+                callback: function(value) {
+                  return value === 1 ? 'Present' : 'Absent';
+                },
+                max: 1,
+                min: 0
+              }
+            },
+            y1: {
+              type: 'linear',
+              position: 'right',
+              title: {
+                display: true,
+                text: 'Marks'
+              },
+              beginAtZero: true,
+              max: 100
+            }
+          }
+        }
+      });
+    };
+
+    dateSelect.addEventListener('change', (e) => {
+      fetchAndDisplay(e.target.value);
+    });
+
+    if (dateSelect.value) {
+      fetchAndDisplay(dateSelect.value);
+    }
+  </script>
+</body>
+</html>

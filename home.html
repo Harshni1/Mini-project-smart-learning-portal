@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Smart Learning Portal</title>
+
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #2d6cdf;
+      --background-gradient: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+      --card-background: rgba(255, 255, 255, 0.9);
+      --text-color: #333;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--background-gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 90%;
+      max-width: 900px;
+      margin: 30px 0;
+      padding: 30px;
+      background: var(--card-background);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin: 0;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    main a {
+      text-decoration: none;
+      background: var(--primary-color);
+      color: white;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+    }
+
+    main a:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(45, 108, 223, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 34px;
+      }
+
+      .logo {
+        width: 100px;
+      }
+
+      main a {
+        padding: 12px 28px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      .logo {
+        width: 80px;
+      }
+
+      main a {
+        padding: 10px 22px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Replace 'your-logo.png' with your actual logo file path or URL -->
+    <img src="uploads/mypic.png" alt="Smart Learning Logo" class="logo" />
+    <h1>Smart Learning Portal</h1>
+  </header>
+
+  <main>
+    <a href="/login">Login</a>
+    <a href="/register">Signup</a>
+  </main>
+
+</body>
+</html>

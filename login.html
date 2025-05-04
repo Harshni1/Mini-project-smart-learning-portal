@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Form</title>
+
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #2d6cdf;
+      --background-gradient: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+      --card-background: rgba(255, 255, 255, 0.9);
+      --text-color: #333;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--background-gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: var(--card-background);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color); /* Same color as home page */
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .form-group span {
+      color: red;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .note a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        width: 80%;
+        padding: 15px;
+      }
+      .submit-btn {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 90%;
+        padding: 10px;
+      }
+      h2 {
+        font-size: 18px;
+      }
+      .form-group input {
+        padding: 8px;
+        font-size: 12px;
+      }
+      .submit-btn {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Login Form</h2>
+    <form action="/login" method="post">
+      <div class="form-group">
+        <label for="email">Email ID <span>*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password <span>*</span></label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+    <div class="note">
+      <span>*</span> create a new account <a href="/register">register</a>
+    </div>
+  </div>
+
+</body>
+</html>

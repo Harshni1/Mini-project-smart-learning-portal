@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: white;
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 22px;
+    }
+
+    .nav-links {
+      list-style-type: none;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .nav-links li {
+      margin: 20px 0;
+      background-color: #34495e;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-links li:hover {
+      background-color: #1abc9c;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .content h1 {
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100px;
+      }
+
+      .sidebar h2 {
+        display: none;
+      }
+
+      .nav-links li a {
+        font-size: 14px;
+      }
+
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>Welcome, Student 👩‍🎓</h1>
+    <p style="color: #666; margin-top: 10px;">Track your learning and explore smart tools to grow!</p>
+
+    <div style="margin-top: 30px; display: flex; gap: 30px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 250px; background: #ecf0f1; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="color: #2c3e50;">📈 Progress Checking</h3>
+        <p style="margin-top: 10px; color: #555;">View your academic performance and track improvements.</p>
+        <a href="/teacher/visualize" style="color: #1abc9c; text-decoration: underline; font-weight: bold;">Check Progress</a>
+      </div>
+
+      <div style="flex: 1; min-width: 250px; background: #ecf0f1; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="color: #2c3e50;">📝 Teacher Uploads</h3>
+        <p style="margin-top: 10px; color: #555;">Check topics, notes, and uploaded dates shared by your teachers for better preparation.</p>
+        <a href="/student/uploads" style="color: #1abc9c; text-decoration: underline; font-weight: bold;">View Uploads</a>
+      </div>
+      
+
+      <div style="flex: 1; min-width: 250px; background: #ecf0f1; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="color: #2c3e50;">📚 RAG Summarizer</h3>
+        <p style="margin-top: 10px; color: #555;">Use Retrieval-Augmented Generation to summarize documents or learn content faster with AI.</p>
+        <a href="/student/rag" style="color: #1abc9c; text-decoration: underline; font-weight: bold;">Summarize Now</a>
+      </div>
+      
+
+      <div style="flex: 1; min-width: 250px; background: #ecf0f1; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="color: #2c3e50;">🤖 LLM Conversations</h3>
+        <p style="margin-top: 10px; color: #555;">Improve your communication skills using AI-powered conversations.</p>
+        <a href="/student/llm" style="color: #1abc9c; text-decoration: underline; font-weight: bold;">Start Chatting</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

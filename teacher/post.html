@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Attendance & Marks</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead {
+      background-color: #1abc9c;
+      color: white;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    select, input[type="number"], input[type="date"] {
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    input[type="number"] {
+      width: 60px;
+    }
+    .submit-btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 16px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .submit-btn:hover {
+      background-color: #16a085;
+    }
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 12px;
+        padding: 8px;
+      }
+      input[type="number"] {
+        width: 40px;
+      }
+      .submit-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📋 Post Attendance & Marks</h1>
+
+  <div class="container">
+    <form id="attendanceForm">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <label for="attendanceDate"><strong>Select Date:</strong></label>
+        <input type="date" id="attendanceDate" name="attendanceDate" required />
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Roll No</th>
+            <th>Student Name</th>
+            <th>Attendance</th>
+            <th>Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JavaScript will populate rows -->
+        </tbody>
+      </table>
+
+      <div style="text-align: center;">
+        <button type="submit" class="submit-btn">Submit Data</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const students = Array.from({ length: 30 }, (_, i) => ({
+      roll: `Roll-${i + 1}`,
+      name: `Student ${i + 1}`
+    }));
+
+    const tbody = document.querySelector('tbody');
+
+    students.forEach(student => {
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td>${student.roll}</td>
+        <td>${student.name}</td>
+        <td>
+          <select name="attendance-${student.roll}">
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+          </select>
+        </td>
+        <td>
+          <input type="number" name="marks-${student.roll}" min="0" max="100" placeholder="0" />
+        </td>
+      `;
+
+      tbody.appendChild(row);
+    });
+
+    const form = document.getElementById('attendanceForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const date = document.getElementById('attendanceDate').value;
+
+      if (!date) {
+        alert("Please select a date!");
+        return;
+      }
+
+      const result = students.map(student => ({
+        roll: student.roll,
+        name: student.name,
+        attendance: formData.get(`attendance-${student.roll}`),
+        marks: formData.get(`marks-${student.roll}`),
+        date: date
+      }));
+
+      fetch('http://localhost:5000/submit-attendance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(result)
+      })
+        .then(res => res.text())
+        .then(data => {
+          alert(data);
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          alert("Submission failed!");
+        });
+    });
+  </script>
+
+</body>
+</html>
